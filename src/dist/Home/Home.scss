@@ -5,15 +5,128 @@
 // @Last modified time: 2017-03-02 14:19:36
 
 
-@media screen and (min-width: 1366px) {
-    .Home {
-        width: 1920px;
-        height: 1000px;
-    }
+.Home {
+   
+    height: 1000px;
 }
+
 .HomeContainer {
     box-sizing: border-box;
     width: 1920px;
+    .Home_clipPath {
+        width: 100%;
+        height: 1000px;
+        position: absolute;
+        padding-left: 200px;
+        z-index: 100;
+        background-color: #802032;
+        clip-path: polygon(0% 0%, 400px 215px, 500px 215px, 500px 366px, 637px 366px, 637px 216px, 735px 216px, 
+            735px 615px, 637px 615px, 637px 465px, 500px 465px, 500px 614px, 400px 614px, 400px 215px, 0px 0px, 0% 100%, 100% 100%, 100% 0%);
+
+        }
+        video {
+            position: relative;
+            left: 400px;
+            top: 200px;
+        }
+
+    }
+    .Home_mask {
+        width: 100%;
+        height: 1000px;
+        position: absolute;
+        padding-left: 300px;
+        z-index: 100;
+        display: flex;
+        .H_letter {
+            display: flex;
+            margin-top: 215px;
+            margin-left: 100px;
+            position: absolute;
+            .HAnimation {
+                bacground-color: transparent;
+
+            }
+            .H_left {
+                position: absolute;
+                width: 100px;
+                height:400px;
+                background-color: transparent;
+                animation: uptodown 2s ease-in;
+            }
+            .H_middle {
+                width: 136px;
+                height: 100px;
+                position: absolute;
+                left: 100px;
+                background-color: transparent;
+                top: 150px;
+                animation: lefttoright 2s ease-in;
+            }
+            .H_right {
+                width: 100px;
+                height:400px;
+                position: absolute;
+                left: 236px;
+                background-color: transparent;
+                animation: udowntoup 2s ease-in;
+            }
+        }
+        .description {
+            color: white;
+            position: absolute;
+            right: 800px;
+            padding-top: 250px;
+            .description_top {
+               height: 25px;
+               text-align: right; 
+               color: #eee;
+            }
+            .description_middle {
+                font-size: 72px;
+                padding: 42px 0px;
+                text-align: right;
+            }
+            .description_bottom {
+                height: 25px;
+                text-align: right;
+            }
+        }
+}
+@keyframes uptodown {
+    from {
+        height:400px;
+        top: 0px;
+        background-color: #802032;
+
+    }
+    to {
+        top: 400px;
+        height: 0px;
+        background-color: #802032;
+    }
+}
+@keyframes lefttoright {
+    from {
+        width: 136px;
+        left: 100px;
+        background-color: #802032;
+    }
+    to {
+        width: 0px;
+        left: 236px;
+        background-color: #802032;
+    }
+}
+@keyframes udowntoup {
+    from {
+        height: 400px;
+        background-color: #802032;
+    }
+    to {
+        height: 0;
+        background-color: #802032;
+    }
 }
 .Home {
     position: relative;
@@ -41,9 +154,20 @@
         border-radius: 10px;
     }
 }
+
 .HomePage_1 {
     background: url(/public/images/homePage.png) no-repeat;
     background-size: 100% 100%;
+    .showMask {
+        position: absolute;
+        z-index: 2000;
+        right: 200px;
+        top: 500px;
+        .fa-arrow-up {
+            font-size: 80px;
+            transform: scale(.3, 1);
+        }
+    }
     
 }
 .HomePage_2 {
@@ -99,7 +223,26 @@
 }
 .HomePage_3 {
     background: url(/public/images/homePage3.png) no-repeat;
-   background-size: 100% 100%;
+    background-size: 100% 100%;
+    .page3_left {
+        position: relative;
+        left: 200px;
+        top: 100px;
+        width: 550px;
+        height: 385px;
+        background: url(/public/images/page3_left.png) no-repeat;
+        h1 {
+            font-family: Perpetua;
+            padding-top: 100px;
+            font-size: 48px;
+            text-align: center;
+        }
+        p {
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+    }
 }
 .HomePage_4 {
     background: url(/public/images/homePage4.png) no-repeat;
@@ -139,7 +282,7 @@
 }
 .HomePage_6 {
     background: url(/public/images/homePage6.png) no-repeat;
-   background-size: 100% 100%;
+    background-size: 100% 100%;
     padding: 0 200px;
     .page6Header {
     box-sizing: border-box;
@@ -148,5 +291,12 @@
             margin-bottom: 35px;
             text-align: center;
         }
+    }
+    .Home_footer {
+        display: flex;
+        justify-content: center;
+    }
+    .Home_footer > div {
+        width: calc(100% / 3);
     }
 }

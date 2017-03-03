@@ -31,6 +31,10 @@ module.exports = {
     },
     devtool: "cheap-module-eval-source-map",
     plugins: [
-        new ExtractTextPlugin('style.css')
+        new ExtractTextPlugin('style.css'),
+        new webpack.DllReferencePlugin({
+            context: __dirname,
+            manifest: require('./manifest.json')
+        })
     ]
 }

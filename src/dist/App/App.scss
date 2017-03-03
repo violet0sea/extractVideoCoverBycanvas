@@ -1,5 +1,18 @@
-body {
+@media screen and (min-width: 1366px) and (max-width: 1920px) {
+    body, .Home {
+        width: 1920px;
+        height: 1000px;
+    }
+}
+@media screen and (min-width: 400px) and (max-width: 1266px) {
+    body, .Home {
+        width: 1366px;
+        height: 768px;
+    }
+}
 
-
-
+.App {
+    width: 100%;
+    box-sizing: border-box;
+    
 }

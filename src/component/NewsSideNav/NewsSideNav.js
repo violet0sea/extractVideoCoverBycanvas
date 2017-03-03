@@ -13,35 +13,49 @@ const config = [
     {
         id: 'companyNews',
         value: 'COMPANY NEWS',
-        imgSrc: ''
+        imgSrc: '/public/images/sideBarIcon1.png'
     },
     {
         id: 'mediaReports',
         value: 'MEDIA REPORTS',
-        imgSrc: ''
+        imgSrc: '/public/images/sideBarIcon2.png'
     },
     {
         id: 'industryNews',
         value: 'INDUSTRY NEWS',
-        imgSrc: ''
+        imgSrc: '/public/images/sideBarIcon3.png'
     }
 ]
 class NewsSideNav extends React.Component {
     constructor(props) {
         super(props);
+        this.handlerClick = this.handlerClick.bind(this);
+
+    }
+    handlerClick(e) {
+
+        const dom = e.currentTarget;
+        const value = dom.getAttribute('data-id');
+       
+        if(this.props.sideNavClick) {
+
+            this.props.sideNavClick(value);
+
+        }
+
 
     }
     renderNavItems(config) {
 
         return config.map(d => {
             return (
-                <div key={d.id}>
+                <div key={d.id} onClick={this.handlerClick} data-id={d.id}>
                     <span>
                     {d.value.split(' ').map((item, index) => {
                         return <p key={index}>{item}</p>
                     })}
                     </span>
-                    <img src='/public/images/s.png' />
+                    <img src={d.imgSrc} />
                 </div>
             )
         })
