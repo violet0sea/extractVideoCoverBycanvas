@@ -1,0 +1,152 @@
+// @Author: haiwang
+// @Date:   2017-02-28 16:43:16
+// @Email:  violet0sea@163.com
+// @Last modified by:   haiwang
+// @Last modified time: 2017-03-02 14:19:36
+
+
+@media screen and (min-width: 1366px) {
+    .Home {
+        width: 1920px;
+        height: 1000px;
+    }
+}
+.HomeContainer {
+    box-sizing: border-box;
+    width: 1920px;
+}
+.Home {
+    position: relative;
+    color: white;
+    box-sizing: border-box;
+    .home_title1 {
+        font-family: Perpetua;
+        font-size: 60px;
+        padding: 270px 274px 20px 274px;
+        text-align: center;
+    }
+    .home_title2 {
+        color: #eee;
+        font-size: 18px;
+        text-align: center;
+        margin: 0px 274px;
+    }
+    .home_title3 {
+        margin: 100px auto;
+        width: 260px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        background-color: #bd1319;
+        border-radius: 10px;
+    }
+}
+.HomePage_1 {
+    background: url(/public/images/homePage.png) no-repeat;
+    background-size: 100% 100%;
+    
+}
+.HomePage_2 {
+    background: url(/public/images/homePage2.png) no-repeat;
+    background-size: 100% 100%;
+    padding: 0px 200px;
+    display: flex;
+    .page2_left {
+        width: 80%;
+        margin-left: 40px;
+        h1 {
+           display: inline-block;
+           width: 100%;
+           padding: 20px 0;
+           font-family: Perpetua;
+           font-size: 48px;
+        }
+        h1:after {
+            content: " ";
+            display: inline-block;
+            position: relative;
+            top: -12px;
+            margin-left: 30px;
+            width: 70%;
+            height: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .HomePage_new_1 {
+            width:60%;
+            height: 400px;
+            // margin-left: 40px;
+            background-color: rgba(122, 128, 128, .5);
+        }
+        .viewMore {
+            margin-top: 50px;
+            border: 1px solid white;
+            width: 120px;
+            height:31x;
+            line-height: 31px;
+            text-align: center;
+        }
+        img {
+            position: relative;
+            left: 50%;
+            top: -180px;
+            border-radius: 50%;
+        }
+    }
+    .page2_right {
+        width: 20%;
+    }
+
+}
+.HomePage_3 {
+    background: url(/public/images/homePage3.png) no-repeat;
+   background-size: 100% 100%;
+}
+.HomePage_4 {
+    background: url(/public/images/homePage4.png) no-repeat;
+   background-size: 100% 100%;
+    .page4Header {
+        margin: 0 200px;
+        padding-top: 75px;
+        box-sizing: border-box;
+        height: 397px;
+        background-color: rgba(106, 121, 139, .8);
+        h1 {
+            font-family: perpetua;
+            font-size: 48px;
+            text-align: center;
+        }
+        p {
+            padding: 30px 70px 0px;
+            line-height: 20px;
+        }
+    }
+
+}
+.HomePage_5 {
+    background: url(/public/images/homePage5.png) no-repeat;
+   background-size: 100% 100%;
+    padding: 0 200px;
+    display: flex;
+    .page5_left {
+        padding-left: 30px;
+        width: 60%;
+        background-color: rgba(0, 128, 128, .6);
+    }
+    .page5_right {
+        width: 40%;
+        background-color: cyan;
+    }
+}
+.HomePage_6 {
+    background: url(/public/images/homePage6.png) no-repeat;
+   background-size: 100% 100%;
+    padding: 0 200px;
+    .page6Header {
+    box-sizing: border-box;
+        padding: 80px 30px 170px;
+        h1 {
+            margin-bottom: 35px;
+            text-align: center;
+        }
+    }
+}

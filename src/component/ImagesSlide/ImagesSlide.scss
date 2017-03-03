@@ -1,0 +1,154 @@
+
+.ImagesSilde {
+    position: absolute;
+    bottom: 77px;
+    img {
+        display: inline-block;
+        width: calc(100% / 3);
+        height: 309px;
+    }
+    .showMiddle {
+        margin: 0 auto;
+        transform: scale(1.22);
+        box-shadow: 10px 10px 0px #011f41;
+    }
+    .leftAnimation,
+    .rightAnimation {
+        position: relative;
+    }
+    .leftAnimation:nth-child(1) {
+        animation: leftAni1st 3s;
+        z-index: 1
+    }
+    .leftAnimation:nth-child(2) {
+        animation: leftAni2rd 3s;
+        z-index: 9;
+    }
+    .leftAnimation:nth-child(3) {
+        animation: leftAni3rd 3s;
+        z-index: 1;
+    }
+    .rightAnimation:nth-child(1) {
+        animation: rightAni1st 3s;
+        z-index: 1
+    }
+    .rightAnimation:nth-child(2) {
+        animation: rightAni2st 3s;
+        z-index: 9;
+    }
+    .rightAnimation:nth-child(3) {
+        animation: rightAni3rd 3s;
+        z-index: 1;
+    }
+    .show {
+        position: relative;
+        animation: show 3s;
+    }
+    .leftAnimationDisappear {
+        position: absolute;
+        right: 0;
+        top: 0;
+        animation: leftClickDisappear 3s;
+    }
+    .rightAnimationDisappear {
+        position: absolute;
+        left: 0;
+        top: 0;
+        animation: rightClickDisappear 3s;
+    }
+}
+@keyframes leftAni1st {
+    from {
+        z-index: 0;
+        left: 33%;
+    }
+    to{
+        position: relative;
+        left: 0;
+    }
+}
+@keyframes leftAni2rd {
+    from {
+        z-index: 10;
+        left: -33%;
+        transform: scale(1);
+    }
+    to{
+        z-index: 10;
+        left: 0;
+        transform: scale(1.22);
+    }
+}
+@keyframes leftAni3rd {
+    from {
+        z-index: 10;
+        left: -33%;
+        transform: scale(1.22);
+
+    }
+    to{
+        left: 0;
+        z-index: 1;
+        transform: scale(1);
+    }
+}
+@keyframes rightAni1st {
+    from {
+        z-index: 10;
+        left: 33%;
+        transform: scale(1.22);
+    }
+    to{
+        position: relative;
+        left: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes rightAni2st {
+    from {
+        z-index: 999;
+        left: 33%;
+        transform: scale(1);
+    }
+    to{
+        z-index: 999;
+        left: 0;
+        transform: scale(1.22);
+    }
+}
+@keyframes rightAni3rd {
+    from {
+        left: -33%;
+    }
+    to{
+        left: 0%;
+    }
+}
+@keyframes leftClickDisappear {
+    from {
+        right: 0%;
+
+    }
+    to{
+        right: 33%;
+    }
+}
+@keyframes rightClickDisappear {
+    from {
+        left: 0%;
+
+    }
+    to{
+        left: 33%;
+    }
+}
+@keyframes middleMove {
+    from {transform: scale(1);}
+    to{transform: scale(1.22);}
+}
+@keyframes show
+{
+    from {width: 0px; left: 90%}
+    to {width: 33%; left: 0;}
+}
