@@ -142,6 +142,14 @@ class ImagesSilde extends React.Component {
 
 
     }
+    componentWillUnmount() {
+
+        if(this.timer) {
+
+            clearInterval(this.timer);
+            
+        }
+    }
     renderImages(config) {
 
         const maxLength = config.length;
