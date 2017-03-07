@@ -53,12 +53,14 @@ class Home extends React.Component {
                 content: 'test text',
                 imgSrc: '/public/images/newsImg.png'
             },
-            pageTwoChoose: 'companyNews'
+            pageTwoChoose: 'companyNews',
+            industryChoose: 'AVIATION'
         };
         this.handlerClick = this.handlerClick.bind(this);
         this.sideNavClick = this.sideNavClick.bind(this);
         this.buttonForUp = this.buttonForUp.bind(this);
         this.buttonForDown = this.buttonForDown.bind(this);
+        this.industryChoose = this.industryChoose.bind(this);
 
     }
     handlerClick(value) {
@@ -110,6 +112,18 @@ class Home extends React.Component {
 
         }
 
+    }
+    industryChoose(e) {
+
+        console.log(e.target);
+        const value = e.target.getAttribute('data-value');
+        if(value) {
+
+            this.setState({
+                industryChoose: value.toUpperCase()
+            });
+
+        }
     }
     render() {
 
@@ -178,11 +192,12 @@ class Home extends React.Component {
                     <div className="page3_left">
                         <h1>{data.pageThree.heading}</h1>
                         <p>{data.pageThree.info}</p>
-                        <div className="industryChoose">
-                            <div className="police"></div>
-                            <div className="aviation"></div>
-                            <div className="smartCity"></div>
-                            <div className="industryChooseIcon">AVIATION</div>
+                        <div className="industryChoose" onClick={this.industryChoose}>
+                            <div className="police" data-value="police"></div>
+                            <div className="aviation" data-value="aviation"></div>
+                            <div className="smartCity" data-value="smartCity"></div>
+                            <div className="industryChooseIcon">{this.state.industryChoose}</div>
+                            <img src='/public/images/page4ChooseIcon.png' />
                         </div>
                     </div>
                     <div className="page3news">
