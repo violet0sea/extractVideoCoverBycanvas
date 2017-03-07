@@ -18,6 +18,7 @@ class ViewMore extends React.Component {
         if(this.handlerClick) {
 
             this.props.handlerClick(this.state.data.value);
+            
         }
     }
     handlerMouseOver() {

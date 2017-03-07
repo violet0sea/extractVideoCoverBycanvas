@@ -1,19 +1,19 @@
 
 .ImagesSilde {
     position: absolute;
-    bottom: 77px;
+    bottom: 110px;
     img {
         display: inline-block;
         width: calc(100% / 3);
-        height: 309px;
+        height: 400px;
     }
     .showMiddle {
         margin: 0 auto;
         transform: scale(1.22);
-        box-shadow: 10px 10px 0px #011f41;
+        box-shadow: 10px 10px 0px rgba(204, 210, 217, .8);
     }
     .showSide {
-        opacity: .5;
+        opacity: .8;
     }
     .leftAnimation,
     .rightAnimation {

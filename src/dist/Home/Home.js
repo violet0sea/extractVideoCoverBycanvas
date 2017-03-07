@@ -9,9 +9,12 @@
 
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 import ViewMore from '../../component/ViewMore/ViewMore';
 import NewsSideNav from '../../component/NewsSideNav/NewsSideNav';
 import ImagesSilde from '../../component/ImagesSlide/ImagesSilde';
+import EnglishData from './englishData';
+import ChineseData from './chineseData';
 import './Home.scss';
 const btn = {
     style: {
@@ -19,6 +22,25 @@ const btn = {
     },
     textContent: "ViewMore",
     value: "news"
+}
+const btn2 = {
+    style: {
+        color: "#000",
+        padding: "10px",
+        marginTop: "20px",
+        width: "65px",
+        border: "1px solid #000",
+        cursor: "pointer"
+    },
+    textContent: "ViewMore",
+    value: "news"
+}
+const btn3 = {
+    style: {
+        color: "#000"
+    },
+    textContent: "ViewMore",
+    value: "cityPartners"
 }
 
 class Home extends React.Component {
@@ -30,33 +52,70 @@ class Home extends React.Component {
             news: {
                 content: 'test text',
                 imgSrc: '/public/images/newsImg.png'
-            }
+            },
+            pageTwoChoose: 'companyNews'
         };
         this.handlerClick = this.handlerClick.bind(this);
         this.sideNavClick = this.sideNavClick.bind(this);
-        this.maskClick = this.maskClick.bind(this);
+        this.buttonForUp = this.buttonForUp.bind(this);
+        this.buttonForDown = this.buttonForDown.bind(this);
 
     }
     handlerClick(value) {
 
         //todo need a ajax and change route
-        console.log('value', value)
+        console.log('value', value);
+        browserHistory.push('/' + value)
+
     }
     sideNavClick(value) {
 
         //todo setState to change news in homePage2
         console.log('___', value)
-    }
-    maskClick() {
+        this.setState({
+            pageTwoChoose: value
+        });
 
-        this.setState((prevState) => ({
-            showMask: !prevState.showMask
-        }))
+    }
+    buttonForUp() {
+
+        const scrollTop = document.body.scrollTop;
+
+        if(scrollTop === 0 && !this.state.showMask) {
+
+            this.setState((prevState) => ({
+                showMask: !prevState.showMask
+            }));
+
+        } else {
+
+            document.body.scrollTop = Math.floor(scrollTop / 1015 - 0.00001) * 1015;
+
+        }
+
+    }    
+    buttonForDown() {
+
+        const scrollTop = document.body.scrollTop;
+
+        if(scrollTop === 0 && this.state.showMask) {
+
+            this.setState((prevState) => ({
+                showMask: !prevState.showMask
+            }));
+
+        } else {
+
+            document.body.scrollTop = Math.ceil(scrollTop / 1015 + 0.000001) * 1015;
+
+        }
+
     }
     render() {
 
         const state = this.state;
         const { showMask } = state;
+        const data = EnglishData;
 
         return (
             <div className="HomeContainer">
@@ -70,34 +129,39 @@ class Home extends React.Component {
                             <div className="HAnimation H_right"></div>
                         </div>
                         <div className="description">
-                            <p className="description_top">CHINA&apos;S BIG DATA</p>
-                            <p className="description_top">VISUAL ANALYSIS OF LEADERS</p>
-                            <p className="description_middle">YDATA</p>
-                            <p className="description_bottom">Provide overall operating</p>
-                            <p className="description_bottom">large enterprise data and analysis services</p>
-                            <p className="description_bottom">for clients of different industries</p>
-                            <p className="description_bottom">provide the interactive visualization</p>
-                            <p className="description_bottom">the data of the whole product</p>
-
+                            <p className="description_top">{data.mask.description.p1}</p>
+                            <p className="description_top">{data.mask.description.p2}</p>
+                            <p className="description_middle">{data.mask.description.p3}</p>
+                            <p className="description_bottom">{data.mask.description.p4}</p>
+                            <p className="description_bottom">{data.mask.description.p5}</p>
+                            <p className="description_bottom">{data.mask.description.p6}</p>
+                            <p className="description_bottom">{data.mask.description.p7}</p>
+                            <p className="description_bottom">{data.mask.description.p8}</p>
                         </div>
                     </div>
                   )
                 : null
                 }
+
                 <div className="Home HomePage_1">
                     
-                    <div className="showMask" onClick={this.maskClick}>click
-                    <i className="fa fa-arrow-up" aria-hidden="true"></i>
+                    <div className="buttonScroll buttonForUp" onClick={this.buttonForUp}>
+                        <div className="maskPoint"></div>
                     </div>
-                    <p className="home_title1">Making Enterprises Operate Big Data More Quickly and Flexibly</p>
-                    <p className="home_title2">Today, everyone talks about Big Data,but it&apos;s unclear how it can help our works
-    or how we can create more potential business value with it?</p>
-                    <p className="home_title3">Operate Big Data With HYDATA</p>
+                    <div className="buttonScroll buttonForDown" onClick={this.buttonForDown}>
+                        <div className="maskPoint"></div>
+                    </div>
+                    <p className="home_title1">{data.pageOne.title1}</p>
+                    <p className="home_title2">{data.pageOne.title2}</p>
+                    <p className="home_title3">{data.pageOne.title3}</p>
                 </div>
+
                 <div className="Home HomePage_2">
                     <div className="page2_left">
-                        <h1>NEWS</h1>
-                        <div className="HomePage_new_1">
+                        <h1>{data.pageTwo.heading}</h1>
+                        <div className="HomePageNews">
+                            <h2>{data.pageTwo.news[this.state.pageTwoChoose].heading}</h2>
+                            <p>{data.pageTwo.news[this.state.pageTwoChoose].info}</p>
                         </div>
                         <ViewMore
                             data={btn}
@@ -106,58 +170,73 @@ class Home extends React.Component {
                         <img src={this.state.news.imgSrc}/>
                     </div>
                     <div className="page2_right">
-                        <NewsSideNav sideNavClick={this.sideNavClick}/>
+                        <NewsSideNav data={data.pageTwo.sideBar} sideNavClick={this.sideNavClick}/>
                     </div>
                 </div>
+
                 <div className="Home HomePage_3">
                     <div className="page3_left">
-                        <h1>INDUSTRY</h1>
-                        <p>CHOOSE A CATEGORY...</p>
+                        <h1>{data.pageThree.heading}</h1>
+                        <p>{data.pageThree.info}</p>
+                        <div className="industryChoose">
+                            <div className="police"></div>
+                            <div className="aviation"></div>
+                            <div className="smartCity"></div>
+                            <div className="industryChooseIcon">AVIATION</div>
+                        </div>
                     </div>
+                    <div className="page3news">
+                        <p>{data.pageThree.news}</p>
+                        <ViewMore                             
+                            data={btn2}
+                            handlerMouseOver={this.handlerMouseOver}
+                            handlerClick={this.handlerClick}/>
+                    </div>
+                    <img className="page3_right" src="/public/images/page3_right.png" />
                 </div>
+
                 <div className="Home HomePage_4">
                     <div className="page4Header">
-                        <h1>ECOLOGICAL PLATFORM</h1>
-                        <p>Operational government department or large enterprise with national economic development leading unit, on the application of big data and the use of big data, are faced with how to effectively deal with vast and dense multi-source heterogeneous data of realistic problems. Due to the lack of big data effectively integrate software and hardware scheme, key node decision makers when making business decisions, often need to allocate a large number of resources for technical support, caused the height of the waste of manpower and money. Sea cloud data to the user point of thinking as the core, fully tap the user demand, dedicates the applicable to the industry and scene, have the comprehensive solution of the general ecological product platform - graph data to big decisions.</p>
+                        <h1>{data.pageFour.heading}</h1>
+                        <p>{data.pageFour.info}</p>
                     </div>
                     <ImagesSilde />
                 </div>
+
                 <div className="Home HomePage_5">
                     <div className="page5_left">
-                        City Partner
+                        <h1>City Partner</h1>
+                        <p>111</p>
                         <ViewMore
                             data={btn}
                             handlerMouseOver={this.handlerMouseOver}
                             handlerClick={this.handlerClick}/>
                     </div>
                     <div className="page5_right">
-                        picture
+                        <img src="/public/images/page5right.png" />
                     </div>
                 </div>
+
                 <div className="Home HomePage_6">
                     <div className="page6Header">
-                        <h1>COMPANY INFORMATION</h1>
-                        <p>Sea cloud data is the leader in the Chinese big data visual analysis, provide large enterprise overall operating data and analysis services, relying on the technology such as computer vision, data algorithm, explore the potential commercial value of big data, for different industries provide interactive visualization based on the data of the whole product, really realize the big data are applied to analysis, decision and anticipation.</p>
-                        <p>Microsoft founder Bill Gates, li keqiang, China's premier has visited the enterprise, have positive evaluation on sea cloud data. When Bill Gates was visiting the sea cloud data, said: "HYDATA is a team full of passion. I like the Chinese embassy on treating data," prime minister li keqiang expectations: "I hope you continue to work hard, in the development of the economic data on the battlefield, is determined to continue and the commandos."</p>
-                        <p>Today, sea cloud data already has offices in places such as Beijing, Shanghai, tianjin, has a world-class data visual analysis team, products are widely used by the world top 500 enterprises, and further promote the commercial application of big data visual analysis market space.</p>
+                        <h1>{data.pageSix.heading}</h1>
+                        {data.pageSix.info.map((d, i) => <p key={i}>{d}</p>)}
                     </div>
                     <footer className="Home_footer">
-                        <div className="Home_Infos">
-                            <p>Address: 17F, Block B,Silver Network</p>
-                            <p>Address: 17F, Block B,Silver Network</p>
-                            <p>Address: 17F, Block B,Silver Network</p>
-                            <p>Address: 17F, Block B,Silver Network</p>
-                        </div>
-                        <div className="Home_Follow_Us">
-                            <p>Weibo</p>
-                            <p>Weibo</p>
-                            <p>Weibo</p>
-                        </div>
-                        <div className="Home_Join_US">
-                        HYDATA sincerely look forward to join in us?
-                        </div>
+                        {data.pageSix.footer.map(d => {
+                            return (
+                                <div className={d.id} key={d.id}>
+                                    <h2>{d.heading}</h2>
+                                    {d.p.map((item, index) => {
+                                        return <p key={index}>{item}</p>
+                                    })}
+                                </div>
+                            )
+                        })}
+     
                     </footer>
                 </div>
+
             </div>
         );
     }

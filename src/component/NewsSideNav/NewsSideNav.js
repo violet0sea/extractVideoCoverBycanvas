@@ -9,26 +9,14 @@
 
 
 import React from 'react';
-const config = [
-    {
-        id: 'companyNews',
-        value: 'COMPANY NEWS',
-        imgSrc: '/public/images/sideBarIcon1.png'
-    },
-    {
-        id: 'mediaReports',
-        value: 'MEDIA REPORTS',
-        imgSrc: '/public/images/sideBarIcon2.png'
-    },
-    {
-        id: 'industryNews',
-        value: 'INDUSTRY NEWS',
-        imgSrc: '/public/images/sideBarIcon3.png'
-    }
-]
+
 class NewsSideNav extends React.Component {
     constructor(props) {
+
         super(props);
+        this.state = {
+            value: 'companyNews'
+        }
         this.handlerClick = this.handlerClick.bind(this);
 
     }
@@ -36,6 +24,9 @@ class NewsSideNav extends React.Component {
 
         const dom = e.currentTarget;
         const value = dom.getAttribute('data-id');
+        this.setState({
+            value: value
+        });
        
         if(this.props.sideNavClick) {
 
@@ -43,13 +34,16 @@ class NewsSideNav extends React.Component {
 
         }
 
-
     }
     renderNavItems(config) {
 
         return config.map(d => {
             return (
-                <div key={d.id} onClick={this.handlerClick} data-id={d.id}>
+                <div 
+                    className={'sideBarNews' + (this.state.value === d.id ? ' chooseNews': '')}
+                    key={d.id} 
+                    onClick={this.handlerClick} 
+                    data-id={d.id}>
                     <span>
                     {d.value.split(' ').map((item, index) => {
                         return <p key={index}>{item}</p>
@@ -61,6 +55,8 @@ class NewsSideNav extends React.Component {
         })
     }
     render() {
+
+        const config = this.props.data;
 
         return (
             <div className='NewsSideNav'>
