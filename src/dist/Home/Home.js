@@ -51,7 +51,7 @@ class Home extends React.Component {
             showMask: true,
             news: {
                 content: 'test text',
-                imgSrc: '/public/images/newsImg.png'
+                imgSrc: '/public/images/page2newsImage.png'
             },
             pageTwoChoose: 'companyNews',
             industryChoose: 'AVIATION'
@@ -61,6 +61,32 @@ class Home extends React.Component {
         this.buttonForUp = this.buttonForUp.bind(this);
         this.buttonForDown = this.buttonForDown.bind(this);
         this.industryChoose = this.industryChoose.bind(this);
+        this.pageIndex = 0;
+        this.timeFlag = true;
+
+
+    }
+    componentDidMount() {
+
+        document.body.addEventListener('wheel', wheelHandler);
+        const that = this;
+
+        function wheelHandler(e) {
+
+            const down = e.deltaY > 0 ? true : false;
+            console.log(this)
+            if(down) {
+                console.log('down')
+                that.buttonForDown();
+
+            } else {
+                console.log('up')
+
+                that.buttonForUp();
+
+            }
+
+        }
 
     }
     handlerClick(value) {
@@ -80,8 +106,22 @@ class Home extends React.Component {
 
     }
     buttonForUp() {
+        
+        if(!this.timeFlag) {
+
+            return;
+
+        }
+
+        this.timeFlag = false;
+        setTimeout(() => {
+
+            this.timeFlag = true;
+
+        }, 1000);
 
         const scrollTop = document.body.scrollTop;
+        
 
         if(scrollTop === 0 && !this.state.showMask) {
 
@@ -91,13 +131,46 @@ class Home extends React.Component {
 
         } else {
 
-            document.body.scrollTop = Math.floor(scrollTop / 1015 - 0.00001) * 1015;
+            // document.body.scrollTop = Math.floor(scrollTop / 1015 - 0.00001) * 1015;
+            if(this.pageIndex < 1) {
+
+                return;
+
+            }
+            this.pageIndex -= 1;
+            const that = this;
+
+            requestAnimationFrame(handler);
+
+            function handler() {
+           
+                document.body.scrollTop -= 25;
+
+                if(document.body.scrollTop > (that.pageIndex * 1015)) {
+
+                    requestAnimationFrame(handler);
+
+                }
+
+            }
 
         }
 
     }    
     buttonForDown() {
 
+        if(!this.timeFlag) {
+
+            return;
+
+        }
+
+        this.timeFlag = false;
+        setTimeout(() => {
+
+            this.timeFlag = true;
+
+        }, 1000)
         const scrollTop = document.body.scrollTop;
 
         if(scrollTop === 0 && this.state.showMask) {
@@ -108,14 +181,39 @@ class Home extends React.Component {
 
         } else {
 
-            document.body.scrollTop = Math.ceil(scrollTop / 1015 + 0.000001) * 1015;
+            this.pageIndex += 1;
+            if(this.pageIndex > 6) {
+
+                this.pageIndex = 5;
+                return;
+
+            }
+            console.log(this.pageIndex)
+            const that = this;
+            requestAnimationFrame(handler);
+
+            function handler() {
+
+                document.body.scrollTop += 25;
+                if(document.body.scrollTop > that.pageIndex * 1015) {
+
+                    document.body.scrollTop = that.pageIndex * 1015;
+
+                }
+
+                if(document.body.scrollTop < that.pageIndex * 1015) {
+
+                    requestAnimationFrame(handler);
+
+                }
+
+            }
 
         }
 
     }
     industryChoose(e) {
 
-        console.log(e.target);
         const value = e.target.getAttribute('data-value');
         if(value) {
 
@@ -124,6 +222,7 @@ class Home extends React.Component {
             });
 
         }
+
     }
     render() {
 
@@ -165,9 +264,13 @@ class Home extends React.Component {
                     <div className="buttonScroll buttonForDown" onClick={this.buttonForDown}>
                         <div className="maskPoint"></div>
                     </div>
-                    <p className="home_title1">{data.pageOne.title1}</p>
-                    <p className="home_title2">{data.pageOne.title2}</p>
-                    <p className="home_title3">{data.pageOne.title3}</p>
+                    {this.state.showMask 
+                    ? null 
+                    : (<section>
+                        <p className="home_title1">{data.pageOne.title1}</p>
+                        <p className="home_title2">{data.pageOne.title2}</p>
+                        <p className="home_title3">{data.pageOne.title3}</p>
+                    </section>)}
                 </div>
 
                 <div className="Home HomePage_2">

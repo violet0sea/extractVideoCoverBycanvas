@@ -1,0 +1,2 @@
+export const CHANGE_HEADER_RED = 'CHANGE_HEAD_RED';
+

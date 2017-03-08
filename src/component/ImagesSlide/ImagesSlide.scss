@@ -20,44 +20,44 @@
         position: relative;
     }
     .leftAnimation:nth-child(1) {
-        animation: leftAni1st 3s;
+        animation: leftAni1st 1s;
         z-index: 1
     }
     .leftAnimation:nth-child(2) {
-        animation: leftAni2rd 3s;
+        animation: leftAni2rd 1s;
         z-index: 9;
     }
     .leftAnimation:nth-child(3) {
-        animation: leftAni3rd 3s;
+        animation: leftAni3rd 1s;
         z-index: 1;
     }
     .rightAnimation:nth-child(1) {
-        animation: rightAni1st 3s;
+        animation: rightAni1st 1s;
         z-index: 1
     }
     .rightAnimation:nth-child(2) {
-        animation: rightAni2st 3s;
+        animation: rightAni2st 1s;
         z-index: 9;
     }
     .rightAnimation:nth-child(3) {
-        animation: rightAni3rd 3s;
+        animation: rightAni3rd 1s;
         z-index: 1;
     }
     .show {
         position: relative;
-        animation: show 3s;
+        animation: show 1s;
     }
     .leftAnimationDisappear {
         position: absolute;
         right: 0;
         top: 0;
-        animation: leftClickDisappear 3s;
+        animation: leftClickDisappear 1s;
     }
     .rightAnimationDisappear {
         position: absolute;
         left: 0;
         top: 0;
-        animation: rightClickDisappear 3s;
+        animation: rightClickDisappear 1s;
     }
 }
 @keyframes leftAni1st {

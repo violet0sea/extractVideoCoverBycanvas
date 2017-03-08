@@ -106,7 +106,7 @@ class ImagesSilde extends React.Component {
             const rightDom = document.querySelectorAll('.showSide')[1];
             rightDom.click();
 
-        }, 3000);
+        }, 1500);
 
         this.timer = timerID;
 
@@ -125,7 +125,7 @@ class ImagesSilde extends React.Component {
 
                 cloneNode.parentNode.removeChild(cloneNode);
 
-            }, 3000);
+            }, 1500);
 
         } else {
 
@@ -137,7 +137,7 @@ class ImagesSilde extends React.Component {
 
                 cloneNode.parentNode.removeChild(cloneNode);
 
-            }, 3000);
+            }, 1500);
         }
 
 
