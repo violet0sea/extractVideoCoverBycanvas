@@ -13,79 +13,70 @@ import { browserHistory } from 'react-router';
 import ViewMore from '../../component/ViewMore/ViewMore';
 import NewsSideNav from '../../component/NewsSideNav/NewsSideNav';
 import ImagesSilde from '../../component/ImagesSlide/ImagesSilde';
+import IndustryNav from '../../component/IndustryNav/IndustryNav';
+import PageOne from './Subpage/PageOne';
+import PageTwo from './Subpage/PageTwo';
+import PageThree from './Subpage/PageThree';
+import PageFour from './Subpage/PageFour';
+import PageFive from './Subpage/PageFive';
+import PageSix from './Subpage/PageSix';
+// import PageMask from './Subpage/PageMask';
 import EnglishData from './englishData';
 import ChineseData from './chineseData';
 import './Home.scss';
-const btn = {
-    style: {
-        color: "white"
-    },
-    textContent: "ViewMore",
-    value: "news"
-}
-const btn2 = {
-    style: {
-        color: "#000",
-        padding: "10px",
-        marginTop: "20px",
-        width: "65px",
-        border: "1px solid #000",
-        cursor: "pointer"
-    },
-    textContent: "ViewMore",
-    value: "news"
-}
-const btn3 = {
-    style: {
-        color: "#000"
-    },
-    textContent: "ViewMore",
-    value: "cityPartners"
-}
 
 class Home extends React.Component {
     constructor(props) {
 
         super(props);
         this.state={
-            showMask: true,
             news: {
                 content: 'test text',
                 imgSrc: '/public/images/page2newsImage.png'
             },
             pageTwoChoose: 'companyNews',
-            industryChoose: 'AVIATION'
+            industryChoose: 'AVIATION',
+            pageIndex: 0
         };
         this.handlerClick = this.handlerClick.bind(this);
         this.sideNavClick = this.sideNavClick.bind(this);
         this.buttonForUp = this.buttonForUp.bind(this);
         this.buttonForDown = this.buttonForDown.bind(this);
-        this.industryChoose = this.industryChoose.bind(this);
+        this.industryClick = this.industryClick.bind(this);
         this.pageIndex = 0;
         this.timeFlag = true;
+        this.pageHeight = 0;
 
 
     }
+
     componentDidMount() {
 
         document.body.addEventListener('wheel', wheelHandler);
         const that = this;
-
+        this.pageHeight = document.querySelector('.Home').offsetHeight;
         function wheelHandler(e) {
 
             const down = e.deltaY > 0 ? true : false;
-            console.log(this)
+ 
             if(down) {
-                console.log('down')
+
                 that.buttonForDown();
 
             } else {
-                console.log('up')
 
                 that.buttonForUp();
 
             }
 
+        }
+
+        const scrollTop = document.body.scrollTop;
+        const freshIndex = Math.round(scrollTop / this.pageHeight);
+
+        if(freshIndex !==0) {
+
+            this.pageIndex = freshIndex;
         }
 
     }
@@ -118,39 +109,32 @@ class Home extends React.Component {
 
             this.timeFlag = true;
 
-        }, 1000);
+        }, 800);
 
         const scrollTop = document.body.scrollTop;
-        
 
-        if(scrollTop === 0 && !this.state.showMask) {
 
-            this.setState((prevState) => ({
-                showMask: !prevState.showMask
-            }));
+        if(this.pageIndex < 1) {
 
-        } else {
+            return;
 
-            // document.body.scrollTop = Math.floor(scrollTop / 1015 - 0.00001) * 1015;
-            if(this.pageIndex < 1) {
+        }
+        this.pageIndex -= 1;
+        console.log(this.pageIndex)
+        this.setState({
+            pageIndex: this.pageIndex
+        })
+        const that = this;
 
-                return;
+        requestAnimationFrame(handler);
 
-            }
-            this.pageIndex -= 1;
-            const that = this;
+        function handler() {
+       
+            document.body.scrollTop -= 50;
 
-            requestAnimationFrame(handler);
+            if(document.body.scrollTop > (that.pageIndex *  that.pageHeight)) {
 
-            function handler() {
-           
-                document.body.scrollTop -= 25;
-
-                if(document.body.scrollTop > (that.pageIndex * 1015)) {
-
-                    requestAnimationFrame(handler);
-
-                }
+                requestAnimationFrame(handler);
 
             }
 
@@ -170,38 +154,35 @@ class Home extends React.Component {
 
             this.timeFlag = true;
 
-        }, 1000)
+        }, 800)
         const scrollTop = document.body.scrollTop;
 
-        if(scrollTop === 0 && this.state.showMask) {
-
-            this.setState((prevState) => ({
-                showMask: !prevState.showMask
-            }));
-
-        } else {
 
             this.pageIndex += 1;
-            if(this.pageIndex > 6) {
+            console.log(this.pageIndex)
+            this.setState({
+                pageIndex: this.pageIndex
+            })
+            if(this.pageIndex > 5) {
 
                 this.pageIndex = 5;
                 return;
 
             }
-            console.log(this.pageIndex)
+
             const that = this;
             requestAnimationFrame(handler);
 
             function handler() {
 
-                document.body.scrollTop += 25;
-                if(document.body.scrollTop > that.pageIndex * 1015) {
+                document.body.scrollTop += 50;
+                if(document.body.scrollTop > that.pageIndex *  that.pageHeight) {
 
-                    document.body.scrollTop = that.pageIndex * 1015;
+                    document.body.scrollTop = that.pageIndex *  that.pageHeight;
 
                 }
 
-                if(document.body.scrollTop < that.pageIndex * 1015) {
+                if(document.body.scrollTop < that.pageIndex *  that.pageHeight) {
 
                     requestAnimationFrame(handler);
 
@@ -209,12 +190,11 @@ class Home extends React.Component {
 
             }
 
-        }
-
     }
-    industryChoose(e) {
+    industryClick(e) {
 
         const value = e.target.getAttribute('data-value');
+
         if(value) {
 
             this.setState({
@@ -226,134 +206,47 @@ class Home extends React.Component {
     }
     render() {
 
-        const state = this.state;
-        const { showMask } = state;
         const data = EnglishData;
 
         return (
             <div className="HomeContainer">
-                { showMask ? <div className="Home_clipPath"></div> : null }
-                { showMask 
-                ? (
-                    <div className="Home_mask">                    
-                        <div className="H_letter">
-                            <div className="HAnimation H_left"></div>
-                            <div className="HAnimation H_middle"></div>
-                            <div className="HAnimation H_right"></div>
-                        </div>
-                        <div className="description">
-                            <p className="description_top">{data.mask.description.p1}</p>
-                            <p className="description_top">{data.mask.description.p2}</p>
-                            <p className="description_middle">{data.mask.description.p3}</p>
-                            <p className="description_bottom">{data.mask.description.p4}</p>
-                            <p className="description_bottom">{data.mask.description.p5}</p>
-                            <p className="description_bottom">{data.mask.description.p6}</p>
-                            <p className="description_bottom">{data.mask.description.p7}</p>
-                            <p className="description_bottom">{data.mask.description.p8}</p>
-                        </div>
-                    </div>
-                  )
-                : null
-                }
-
-                <div className="Home HomePage_1">
-                    
-                    <div className="buttonScroll buttonForUp" onClick={this.buttonForUp}>
-                        <div className="maskPoint"></div>
-                    </div>
-                    <div className="buttonScroll buttonForDown" onClick={this.buttonForDown}>
-                        <div className="maskPoint"></div>
-                    </div>
-                    {this.state.showMask 
-                    ? null 
-                    : (<section>
-                        <p className="home_title1">{data.pageOne.title1}</p>
-                        <p className="home_title2">{data.pageOne.title2}</p>
-                        <p className="home_title3">{data.pageOne.title3}</p>
-                    </section>)}
-                </div>
-
-                <div className="Home HomePage_2">
-                    <div className="page2_left">
-                        <h1>{data.pageTwo.heading}</h1>
-                        <div className="HomePageNews">
-                            <h2>{data.pageTwo.news[this.state.pageTwoChoose].heading}</h2>
-                            <p>{data.pageTwo.news[this.state.pageTwoChoose].info}</p>
-                        </div>
-                        <ViewMore
-                            data={btn}
-                            handlerMouseOver={this.handlerMouseOver}
-                            handlerClick={this.handlerClick}/>
-                        <img src={this.state.news.imgSrc}/>
-                    </div>
-                    <div className="page2_right">
-                        <NewsSideNav data={data.pageTwo.sideBar} sideNavClick={this.sideNavClick}/>
-                    </div>
-                </div>
-
-                <div className="Home HomePage_3">
-                    <div className="page3_left">
-                        <h1>{data.pageThree.heading}</h1>
-                        <p>{data.pageThree.info}</p>
-                        <div className="industryChoose" onClick={this.industryChoose}>
-                            <div className="police" data-value="police"></div>
-                            <div className="aviation" data-value="aviation"></div>
-                            <div className="smartCity" data-value="smartCity"></div>
-                            <div className="industryChooseIcon">{this.state.industryChoose}</div>
-                            <img src='/public/images/page4ChooseIcon.png' />
-                        </div>
-                    </div>
-                    <div className="page3news">
-                        <p>{data.pageThree.news}</p>
-                        <ViewMore                             
-                            data={btn2}
-                            handlerMouseOver={this.handlerMouseOver}
-                            handlerClick={this.handlerClick}/>
-                    </div>
-                    <img className="page3_right" src="/public/images/page3_right.png" />
-                </div>
-
-                <div className="Home HomePage_4">
-                    <div className="page4Header">
-                        <h1>{data.pageFour.heading}</h1>
-                        <p>{data.pageFour.info}</p>
-                    </div>
-                    <ImagesSilde />
-                </div>
-
-                <div className="Home HomePage_5">
-                    <div className="page5_left">
-                        <h1>City Partner</h1>
-                        <p>111</p>
-                        <ViewMore
-                            data={btn}
-                            handlerMouseOver={this.handlerMouseOver}
-                            handlerClick={this.handlerClick}/>
-                    </div>
-                    <div className="page5_right">
-                        <img src="/public/images/page5right.png" />
-                    </div>
-                </div>
-
-                <div className="Home HomePage_6">
-                    <div className="page6Header">
-                        <h1>{data.pageSix.heading}</h1>
-                        {data.pageSix.info.map((d, i) => <p key={i}>{d}</p>)}
-                    </div>
-                    <footer className="Home_footer">
-                        {data.pageSix.footer.map(d => {
-                            return (
-                                <div className={d.id} key={d.id}>
-                                    <h2>{d.heading}</h2>
-                                    {d.p.map((item, index) => {
-                                        return <p key={index}>{item}</p>
-                                    })}
-                                </div>
-                            )
-                        })}
-     
-                    </footer>
-                </div>
+                <PageOne 
+                    pageIndex={this.state.pageIndex}
+                    data={data}
+                    buttonForUp={this.buttonForUp}
+                    buttonForDown={this.buttonForDown}
+                />
+                <PageTwo 
+                    pageIndex={this.state.pageIndex}
+                    news={this.state.news}
+                    pageTwoChoose={this.state.pageTwoChoose}
+                    data={data}
+                    sideNavClick={this.sideNavClick}
+                    handlerMouseOver={this.handlerMouseOver}
+                    handlerClick={this.handlerClick}
+                />
+                <PageThree
+                    pageIndex={this.state.pageIndex}
+                    industryChoose={this.state.industryChoose}
+                    data={data}
+                    handlerMouseOver={this.handlerMouseOver}
+                    handlerClick={this.handlerClick}
+                    industryClick={this.industryClick}
+                />
+                <PageFour 
+                    data={data}
+                    pageIndex={this.state.pageIndex}
+                />
+                <PageFive 
+                    pageIndex={this.state.pageIndex}
+                    data={data}
+                    handlerMouseOver={this.handlerMouseOver}
+                    handlerClick={this.handlerClick}
+                />
+                <PageSix 
+                    pageIndex={this.state.pageIndex}
+                    data={data}
+                />
 
             </div>
         );

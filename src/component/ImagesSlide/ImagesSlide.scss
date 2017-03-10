@@ -1,11 +1,10 @@
 
 .ImagesSilde {
     position: absolute;
-    bottom: 110px;
     img {
         display: inline-block;
         width: calc(100% / 3);
-        height: 400px;
+        height: 100%;
     }
     .showMiddle {
         margin: 0 auto;
@@ -14,6 +13,7 @@
     }
     .showSide {
         opacity: .8;
+        cursor: pointer;
     }
     .leftAnimation,
     .rightAnimation {
@@ -50,16 +50,40 @@
     .leftAnimationDisappear {
         position: absolute;
         right: 0;
-        top: 0;
-        animation: leftClickDisappear 1s;
+        animation: leftClickDisappear 1.5s;
     }
     .rightAnimationDisappear {
         position: absolute;
         left: 0;
-        top: 0;
-        animation: rightClickDisappear 1s;
+        animation: rightClickDisappear 1.5s;
     }
 }
+
+.ImagesSilde:before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 40px);
+    left: 50px;
+    z-index: 9999;
+    width: 50px;
+    height: 80px;
+    pointer-events: none;
+    background: url('/public/images/slideDirection.png');
+    background-position: 50px 0;
+}
+.ImagesSilde:after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 40px);
+    right: 50px;
+    z-index: 9999;
+    width: 50px;
+    height: 80px;
+    pointer-events: none;
+    background: url('/public/images/slideDirection.png');
+  
+}
+
 @keyframes leftAni1st {
     from {
         z-index: 0;

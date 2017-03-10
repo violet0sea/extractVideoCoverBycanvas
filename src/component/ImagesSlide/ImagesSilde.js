@@ -111,24 +111,25 @@ class ImagesSilde extends React.Component {
         this.timer = timerID;
 
     }
-    componentWillUpdate() {
 
-        // 由于imageSilde组件只渲染了三个img标签，在点击切换时需要做一个消亡动画， here it is
+    componentWillUpdate(nextProps, nextState) {
+
+        // 由于imageSilde组件只渲染了三个img标签，在点击切换时需要做一个消亡动画
         if(this.state.leftClick === false) {
-
+            console.log('right')
             const dom = document.querySelector('.showSide');
             const cloneNode = dom.cloneNode();
             cloneNode.className += ' rightAnimationDisappear';
             dom.parentNode.appendChild(cloneNode);
             dom.className += ' rightAnimationDisappear';
             setTimeout(() => {
-
+            
                 cloneNode.parentNode.removeChild(cloneNode);
 
             }, 1500);
 
         } else {
-
+            console.log('left')
             const dom = document.querySelectorAll('.showSide')[1];
             const cloneNode = dom.cloneNode();
             cloneNode.className += ' leftAnimationDisappear';
