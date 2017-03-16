@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { App, Home, News, BBS, Case, Product, TalentPool, CityPartners, AboutUs } from './src/dist/export';
-console.log('____', App)
+
 const RootRoutes = (
         <Route path='/' component={App}>
             <IndexRoute component={Home} /> 
@@ -12,6 +12,7 @@ const RootRoutes = (
             <Route path='cityPartners' component={CityPartners} /> 
             <Route path='aboutUs' component={AboutUs} /> 
             <Route path='talentPool' component={TalentPool} /> 
+            <Route path='admin' component={TalentPool} /> 
         </Route>
 );
 

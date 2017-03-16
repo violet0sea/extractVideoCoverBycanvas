@@ -10,17 +10,15 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
-import ViewMore from '../../component/ViewMore/ViewMore';
-import NewsSideNav from '../../component/NewsSideNav/NewsSideNav';
-import ImagesSilde from '../../component/ImagesSlide/ImagesSilde';
-import IndustryNav from '../../component/IndustryNav/IndustryNav';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as action from '../../../action/actionCreate';
 import PageOne from './Subpage/PageOne';
 import PageTwo from './Subpage/PageTwo';
 import PageThree from './Subpage/PageThree';
 import PageFour from './Subpage/PageFour';
 import PageFive from './Subpage/PageFive';
 import PageSix from './Subpage/PageSix';
-// import PageMask from './Subpage/PageMask';
 import EnglishData from './englishData';
 import ChineseData from './chineseData';
 import './Home.scss';
@@ -34,9 +32,9 @@ class Home extends React.Component {
                 content: 'test text',
                 imgSrc: '/public/images/page2newsImage.png'
             },
-            pageTwoChoose: 'companyNews',
-            industryChoose: 'AVIATION',
+            industryChoose: 'aviation',
             pageIndex: 0
+
         };
         this.handlerClick = this.handlerClick.bind(this);
         this.sideNavClick = this.sideNavClick.bind(this);
@@ -46,7 +44,7 @@ class Home extends React.Component {
         this.pageIndex = 0;
         this.timeFlag = true;
         this.pageHeight = 0;
-
+        this.cache = {};
 
     }
 
@@ -71,7 +69,7 @@ class Home extends React.Component {
 
         }
 
-        const scrollTop = document.body.scrollTop;
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         const freshIndex = Math.round(scrollTop / this.pageHeight);
 
         if(freshIndex !==0) {
@@ -89,11 +87,7 @@ class Home extends React.Component {
     }
     sideNavClick(value) {
 
-        //todo setState to change news in homePage2
-        console.log('___', value)
-        this.setState({
-            pageTwoChoose: value
-        });
+        this.props.actions.changeInitialNewsType(value);
 
     }
     buttonForUp() {
@@ -111,7 +105,7 @@ class Home extends React.Component {
 
         }, 800);
 
-        const scrollTop = document.body.scrollTop;
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 
 
         if(this.pageIndex < 1) {
@@ -120,7 +114,6 @@ class Home extends React.Component {
 
         }
         this.pageIndex -= 1;
-        console.log(this.pageIndex)
         this.setState({
             pageIndex: this.pageIndex
         })
@@ -131,8 +124,9 @@ class Home extends React.Component {
         function handler() {
        
             document.body.scrollTop -= 50;
+            document.documentElement.scrollTop -= 50;
 
-            if(document.body.scrollTop > (that.pageIndex *  that.pageHeight)) {
+            if((document.body.scrollTop || document.documentElement.scrollTop) > (that.pageIndex *  that.pageHeight)) {
 
                 requestAnimationFrame(handler);
 
@@ -155,40 +149,40 @@ class Home extends React.Component {
             this.timeFlag = true;
 
         }, 800)
-        const scrollTop = document.body.scrollTop;
+        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 
+        this.pageIndex += 1;
+        this.setState({
+            pageIndex: this.pageIndex
+        })
+        if(this.pageIndex > 5) {
 
-            this.pageIndex += 1;
-            console.log(this.pageIndex)
-            this.setState({
-                pageIndex: this.pageIndex
-            })
-            if(this.pageIndex > 5) {
+            this.pageIndex = 5;
+            return;
 
-                this.pageIndex = 5;
-                return;
+        }
+
+        const that = this;
+        requestAnimationFrame(handler);
+
+        function handler() {
+
+            document.body.scrollTop += 50;
+            document.documentElement.scrollTop += 50;
+            if((document.body.scrollTop || document.documentElement.scrollTop) > that.pageIndex *  that.pageHeight) {
+
+                document.body.scrollTop = that.pageIndex *  that.pageHeight;
+                document.documentElement.scrollTop = that.pageIndex *  that.pageHeight;
+
+            }
+
+            if(document.body.scrollTop || document.documentElement.scrollTop < that.pageIndex *  that.pageHeight) {
+
+                requestAnimationFrame(handler);
 
             }
 
-            const that = this;
-            requestAnimationFrame(handler);
-
-            function handler() {
-
-                document.body.scrollTop += 50;
-                if(document.body.scrollTop > that.pageIndex *  that.pageHeight) {
-
-                    document.body.scrollTop = that.pageIndex *  that.pageHeight;
-
-                }
-
-                if(document.body.scrollTop < that.pageIndex *  that.pageHeight) {
-
-                    requestAnimationFrame(handler);
-
-                }
-
-            }
+        }
 
     }
     industryClick(e) {
@@ -198,7 +192,7 @@ class Home extends React.Component {
         if(value) {
 
             this.setState({
-                industryChoose: value.toUpperCase()
+                industryChoose: value
             });
 
         }
@@ -207,7 +201,9 @@ class Home extends React.Component {
     render() {
 
         const data = EnglishData;
-
+        const initialNews = this.props.initialNews;
+        const pageTwoChoose = this.props.pageTwoChoose;
+        
         return (
             <div className="HomeContainer">
                 <PageOne 
@@ -219,7 +215,8 @@ class Home extends React.Component {
                 <PageTwo 
                     pageIndex={this.state.pageIndex}
                     news={this.state.news}
-                    pageTwoChoose={this.state.pageTwoChoose}
+                    initialNews={initialNews}
+                    pageTwoChoose={pageTwoChoose}
                     data={data}
                     sideNavClick={this.sideNavClick}
                     handlerMouseOver={this.handlerMouseOver}
@@ -229,6 +226,7 @@ class Home extends React.Component {
                     pageIndex={this.state.pageIndex}
                     industryChoose={this.state.industryChoose}
                     data={data}
+                    initialNews={initialNews}
                     handlerMouseOver={this.handlerMouseOver}
                     handlerClick={this.handlerClick}
                     industryClick={this.industryClick}
@@ -253,4 +251,15 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        initialNews: state.getInitialNews.initialNews,
+        pageTwoChoose: state.changeInitialNews  
+    }
+
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(action, dispatch)
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

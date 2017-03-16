@@ -16,8 +16,8 @@ export default function(props) {
             <div className="page2_left">
                 <h1 className={props.pageIndex === 1 ? 'h2_animation' : 'noAnimation'}>{props.data.pageTwo.heading}</h1>
                 <div className="HomePageNews">
-                    <h2 className={props.pageIndex === 1 ? 'h2_animation' : 'noAnimation'}>{props.data.pageTwo.news[props.pageTwoChoose].heading}</h2>
-                    <p className={props.pageIndex === 1 ? 'h2_animation' : 'noAnimation'}>{props.data.pageTwo.news[props.pageTwoChoose].info}</p>
+                    <h2 className={props.pageIndex === 1 ? 'h2_animation' : 'noAnimation'}>{props.initialNews[props.pageTwoChoose].heading}</h2>
+                    <p className={props.pageIndex === 1 ? 'h2_animation' : 'noAnimation'}>{props.initialNews[props.pageTwoChoose].info}</p>
                 </div>
                 <ViewMore
                     data={btn}

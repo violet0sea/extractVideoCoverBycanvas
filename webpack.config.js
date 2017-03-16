@@ -22,7 +22,6 @@ module.exports = {
                     use: ['css-loader', 'sass-loader']
                 })
             }
-
         ]
     },
     devServer: {
@@ -32,6 +31,7 @@ module.exports = {
     },
     devtool: "cheap-module-eval-source-map",
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin('style.css'),
         new webpack.DllReferencePlugin({
             context: __dirname,

@@ -3,13 +3,18 @@ import ImagesSilde from '../../../component/ImagesSlide/ImagesSilde';
 
 export default class extends React.Component {
     constructor(props) {
+
         super(props);
 
     }
     shouldComponentUpdate() {
+
+        // todo ImageSile shouldn't be influenced by it's parent state change, which made mess.
         return false;
+
     }
     render() {
+
         return(
             <div className="Home HomePage_4">
                 <div className="page4Header">
@@ -18,7 +23,6 @@ export default class extends React.Component {
                 </div>
                 <ImagesSilde />
             </div>
-
         );
         
     }

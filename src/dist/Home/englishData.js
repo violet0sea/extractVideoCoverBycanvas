@@ -66,7 +66,7 @@ const HomeData = {
     },
     pageFive: {
         heading: 'CITY PARTNERS',
-        info: ''
+        info: 'HYDATA as China\'s leaders, big data visual analysis can provide overall operating large enterprise data and analysis services. Sea cloud data made p "intelligence", has completely realized the standardization and modularization of the project, through simple operation, directly to the needs of customers can generate visual program. "Intellectual p" has become a mature, but replication, but rapid promotion products. In order to help more enterprises, accelerate the process of digital city, the sea of cloud data hope use map easy standardization characteristics of brain, make joint model, in the face of the provinces and cities all over the country, and inviting in "city partners". '
     },
     pageSix: {
         heading: 'COMPANY INFORMATION',

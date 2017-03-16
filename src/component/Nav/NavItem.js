@@ -6,7 +6,6 @@ function NavItem(props) {
         <li>
             <Link to={`/${props.data.id === 'home' ? '' : props.data.id}`}>
                 {props.data.name}
-                {props.data.children ? NavItem(props.data.children) : null}
             </Link>
         </li>
     );
