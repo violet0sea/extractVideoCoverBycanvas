@@ -1,0 +1,231 @@
+.Product {
+    width: 100%;
+    color: white;
+    .productPage {
+        box-sizing: border-box;
+        height: 1015px;
+        padding: 0 14.8%;
+        @media screen and (min-width: 400px) and (max-width: 1366px) {
+            height: 703px;
+        }
+        p {
+            line-height: 30px;
+        }
+    }
+    .pageOne { 
+        background: url('/public/images/productPageOne.png') no-repeat;
+        background-size: 100% 100%;
+        h1 {
+            padding-top: 23.5%; 
+            text-align: center;
+            font-family: Perpetua;
+            font-size: 60px;
+        }
+        p {
+            padding-top: 4%;
+            font-size: 18px;
+        }
+        .productList {
+
+            padding: 15% 0;
+            li {
+                display: inline-block;
+                float: left;
+                background-repeat: no-repeat;
+                width: 25%;
+                height: 50px;
+                margin-bottom: 5%;
+                cursor: pointer;
+            }
+            li:nth-child(1) {
+                width: 150px;
+                margin-right: calc(25% - 150px);
+            }
+            li:nth-child(2) {
+                width: 150px;
+                margin-right: calc(25% - 150px);
+                background-position: -235px 0;              
+            }
+            li:nth-child(3) {
+                width: 150px;
+                margin-right: calc(25% - 150px);
+                background-position: -455px 0;              
+            }
+            li:nth-child(4) {
+                width: 200px;
+                background-position: -640px 0;              
+            }
+            li:nth-child(5) {
+                width: 150px;
+                margin-right: calc(25% - 150px);
+                background-position: 0 -80px;              
+            }
+            li:nth-child(6) {
+                width: 150px;
+                margin-right: calc(25% - 150px);
+                background-position: -235px -80px;              
+            }
+            li:nth-child(7) {
+                width: 280px;
+                background-position: -455px -80px;              
+            }
+        }
+
+    }
+    .pageTwo { 
+        background: url('/public/images/productPageTwo.png') no-repeat;
+        background-size: 100% 100%;
+        header {
+            padding-top: 8%;
+            img {
+                position: relative;
+                left: calc(50% - 72px);
+            }
+        }
+        .pdt_pto_content {
+            margin-top: 10%;
+            display: flex;
+            .pdt_pto_contentDetail {
+                width: 50%;
+                position: relative;
+            }
+            .pdt_pto_content_left:after {
+                content: '';
+                display: block;
+                position: absolute;
+                z-index: 10;
+                bottom: 7%;
+                left: 40%;
+                width: 150px;
+                height: 150px;
+                background: url(/public/images/page2Icon.png) no-repeat;
+                background-size: 100% 100%;
+            }
+            .pdt_pto_content_right {
+                .diva {
+                    font-size: 48px;
+                    font-family: Perpetua;
+                    margin-bottom: 4%;
+                    .redcolor {
+                        color: red;
+                        padding-left: .5em;
+                    }
+                    .tueasyHubTitle {
+                        padding-left: 0;
+                    }
+                }
+                .divaDescription {
+                    p {               
+                        margin-bottom: 1em;
+                    }
+                }
+            }
+        }
+
+    }
+    .pageThree { 
+        background-size: 100% 100%;
+        .zhijing {
+            position: relative;
+            top: 30%;
+            margin: 0 10%;
+            padding: 50px 10px;
+            box-sizing: content-box;
+            color: black;
+            background-color: white;
+        }
+        .tueasyHubProduction {
+            width: 50%;
+            height: 100%;
+            color: #000;
+            .tueasyHubFeature {
+                padding-top: 35%;
+                font-size: 48px;
+                font-family: Perpetua;
+                margin-bottom: 4%;
+                .redcolor {
+                    color: red;
+                    padding-left: .5em;
+                }
+            }
+            .tueasyHubDescrption {
+                margin-left: 5%;
+                margin-right: 3%;
+                background-color: #e9e9ee;
+                h2 {
+                    font-size: 21px;
+                    padding: 20px 0;
+                    position: relative;
+                }
+                h2:before {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    left: -50px;
+                    width: 50px;
+                    height: 50px;
+                    background: url('/public/images/productTueasyHubDescrpitonIcon.png');
+                }
+                p {
+                    position: relative;
+                }
+                p:after {
+                    display: block;
+                    content: '';
+                    position: absolute;
+                    left: -50px;
+                    width: 40px;
+                    height: 45px;
+                    background: url('/public/images/productTueasyHubDescrpitonIcon.png');
+                    background-position: 0 -130px;
+                }
+            }
+
+        }
+
+    }
+    .pageLast { 
+        background: url('/public/images/productPageLast.png') no-repeat;
+        background-size: 100% 100%;
+        position: relative;
+        p {
+            line-height: 25px;
+        }
+        p.plt_description {
+            padding-top: 19%;
+        }
+        .zhijing {
+            padding-top: 18%; 
+        }
+        .tueasyHub {
+            padding-top: 10%;
+            h1 {
+                font-family: Perpetua;
+                font-size: 60px;
+                text-align: center;
+                margin-bottom: 4%;
+            }
+            h2 {
+                font-size: 21px;
+                position: relative;
+                padding-left: 20px;
+            }
+            p {
+                margin-bottom: 30px;
+            }
+
+            h2:before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: -1px;
+                top: 8px;
+                width: 5px;
+                border-radius: 50%;
+                height: 5px;
+                background: white;
+            }
+        }
+    }
+}
+

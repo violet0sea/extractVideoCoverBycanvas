@@ -14,9 +14,9 @@ export default class extends React.Component {
 
     }
     render() {
-
+        
         return(
-            <div className="Home HomePage_4">
+            <div id="product" className="Home HomePage_4">
                 <div className="page4Header">
                     <h1>{this.props.data.pageFour.heading}</h1>
                     <p>{this.props.data.pageFour.info}</p>

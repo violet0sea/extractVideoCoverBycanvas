@@ -1,4 +1,4 @@
-import { GET_INITIAL_NEWS, CHANGE_INITIAL_NEWS_TYPE } from '../constant/actionType';
+import { GET_INITIAL_NEWS, CHANGE_INITIAL_NEWS_TYPE, CHANGE_NAV } from '../constant/actionType';
 
 const initialNews = {
     companyNews: {
@@ -27,7 +27,8 @@ const initialNews = {
     }
 };
 
-const pageTwoChoose = 'companyNews'
+const pageTwoChoose = 'companyNews';
+
 
 
 export function getInitialNews(state = {initialNews}, action) {
@@ -39,9 +40,11 @@ export function getInitialNews(state = {initialNews}, action) {
     }
 }
 export function changeInitialNews(state = pageTwoChoose, action) {
+
     switch(action.type) {
         case CHANGE_INITIAL_NEWS_TYPE:
-        console.log('action', state, action)
+            return action.payload;
+        case CHANGE_NAV:
             return action.payload;
         default: 
             return state;

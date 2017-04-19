@@ -44,15 +44,20 @@ class Home extends React.Component {
         this.pageIndex = 0;
         this.timeFlag = true;
         this.pageHeight = 0;
-        this.cache = {};
 
     }
-
     componentDidMount() {
 
         document.body.addEventListener('wheel', wheelHandler);
+        window.addEventListener('resize', () => {
+
+            const height = (window.screen.width > 1366 ? 1015 : 703);
+            this.pageHeight = height;
+
+        });
         const that = this;
         this.pageHeight = document.querySelector('.Home').offsetHeight;
+
         function wheelHandler(e) {
 
             const down = e.deltaY > 0 ? true : false;
@@ -68,6 +73,7 @@ class Home extends React.Component {
             }
 
         }
+        this.wheelHandler = wheelHandler;
 
         const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
         const freshIndex = Math.round(scrollTop / this.pageHeight);
@@ -78,10 +84,16 @@ class Home extends React.Component {
         }
 
     }
+    componentWillUnmount() {
+
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.body.removeEventListener('wheel', this.wheelHandler);
+
+    }
     handlerClick(value) {
 
         //todo need a ajax and change route
-        console.log('value', value);
         browserHistory.push('/' + value)
 
     }
@@ -164,7 +176,6 @@ class Home extends React.Component {
 
         const that = this;
         requestAnimationFrame(handler);
-
         function handler() {
 
             document.body.scrollTop += 50;
@@ -176,7 +187,7 @@ class Home extends React.Component {
 
             }
 
-            if(document.body.scrollTop || document.documentElement.scrollTop < that.pageIndex *  that.pageHeight) {
+            if((document.body.scrollTop || document.documentElement.scrollTop) < that.pageIndex *  that.pageHeight) {
 
                 requestAnimationFrame(handler);
 

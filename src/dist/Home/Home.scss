@@ -137,10 +137,16 @@
         box-sizing: border-box;
         height: 47%;
         font-family: Perpetua;
-        font-size: 60px;
+        font-size: 4em;
         padding-top: 18%;
         margin: 0 20%;
         text-align: center;
+    }
+    @media screen and (max-width: 400px) {
+        .home_title1 {
+            font-size: 2em;
+
+        }
     }
     .home_title2 {
         box-sizing: border-box;
@@ -165,93 +171,6 @@
 .HomePage_1 {
     background: url(/public/images/homePage.png) no-repeat;
     background-size: 100% 100%;
-    .upAndDown {
-        position: fixed;
-        top: 45%;
-        right: 7%;
-        cursor: pointer;
-        width: 3%;
-        height: 10%;
-        z-index: 9999;
-    }
-    .maskPoint {
-        position: relative;
-        right: -17.7%;
-        top: 75%;
-        width: 2px;
-        height: 2px;
-        border-radius: 50%;
-        background-color: white;
-    }
-    @media screen and (min-width: 400px) and (max-width: 1366px) {
-
-        .maskPoint {
-            position: relative;
-            right: -20.7%;
-            top: 120%;
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            background-color: white;
-        }
-    }
-    .buttonForUp {
-        z-index: 2000;
-        width: 1px;
-        padding: 0px 10px;
-        height: 4%;
-        box-sizing: content-box;
-    }
-    .buttonForUp:after {
-        content: '';
-        width: 0px;
-        height: 40px;
-        position: absolute;
-        top: 25px;
-        border-left: 1px solid white;
-    }
-    .buttonForUp:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0px;
-        top: 27px;
-        width: 20px;
-        height: 20px;
-        border-left: 1px solid white;
-        border-top: 1px solid white;
-        transform: rotate(45deg);
-    }
-    .buttonForDown {
-        z-index: 2000;
-        right: 7%;
-        top: 55%;
-        width: 1px;
-        padding: 0px 10px;
-        height: 4%;
-        box-sizing: content-box;
-    }
-    .buttonForDown:after {
-        content: '';
-        width: 1px;
-        height: 40px;
-        position: absolute;
-        top: 98px;
-        border-left: 1px solid white;
-    }
-    .buttonForDown:before {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0px;
-        top: 115px;
-        width: 20px;
-        height: 20px;
-        border-right: 1px solid white;
-        border-bottom: 1px solid white;
-        transform: rotate(45deg);
-    }
-    
 }
 .HomePage_2 {
     background: url(/public/images/homePage2.png) no-repeat;
@@ -758,57 +677,6 @@
         p {
             line-height: 25px;
         }
-    }
-    .Home_footer {
-        position: absolute;
-        width: 66%;
-        bottom: 5%;
-        display: flex;
-        justify-content: center;
-        h2 {
-            padding-bottom: 30px;
-        }
-        .Home_followus {
-            position: relative;
-            p {
-                padding-left: 40px;
-            }
-            p:nth-child(2):before {
-                content: '';
-                display: block;
-                position: absolute;
-                left: 2px;
-                top: 50px;
-                background: url('/public/images/followIcon.png') no-repeat;
-                width: 25px;
-                height: 25px;
-            }
-            p:nth-child(3):before {
-                content: '';
-                display: block;
-                position: absolute;
-                left: 2px;
-                top: 75px;
-                background: url('/public/images/followIcon.png') no-repeat;
-                background-position: 0 -29px;
-                width: 25px;
-                height: 25px;
-            }
-            p:nth-child(4):before {
-                content: '';
-                display: block;
-                position: absolute;
-                left: 2px;
-                top: 100px;
-                background: url('/public/images/followIcon.png') no-repeat;
-                background-position: 0 -58px;
-                width: 25px;
-                height: 25px;
-            }
-        }
-    }
-    .Home_footer > div {
-        width: calc(100% / 3);
     }
     p {
         line-height: 25px;

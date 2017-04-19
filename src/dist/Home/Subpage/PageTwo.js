@@ -12,7 +12,7 @@ const btn = {
 
 export default function(props) {
     return(
-        <div className="Home HomePage_2">
+        <div id="news" className="Home HomePage_2">
             <div className="page2_left">
                 <h1 className={props.pageIndex === 1 ? 'h2_animation' : 'noAnimation'}>{props.data.pageTwo.heading}</h1>
                 <div className="HomePageNews">

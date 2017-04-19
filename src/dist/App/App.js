@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as action from '../../../action/actionCreate';
-import Header from '../Header/Header';
+import Header from '../../component/Header/Header';
 import sendAjax from '../../utils/sendAjax';
 import { getInitialNews } from '../../../public/urlConfig/urlConfig';
 import './App.scss';
@@ -11,14 +11,15 @@ class App extends React.Component {
     componentDidMount() {
 
         // initial index.html get page short message informations
-        let json =  sendAjax(getInitialNews,'GET');
-        json.then((data) => {
+        // let json =  sendAjax(getInitialNews,'GET');
+        // json.then((data) => {
 
-            this.props.actions.getInitialNews({
-                initialNews: JSON.parse(data).result.initialNews
-            });
+        //     this.props.actions.getInitialNews({
+        //         initialNews: JSON.parse(data).result.initialNews
+        //     });
 
-        });
+        // });
+        
 
     }
     render() {

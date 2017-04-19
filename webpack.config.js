@@ -25,7 +25,6 @@ module.exports = {
         ]
     },
     devServer: {
-        host: '192.168.3.197',
         port: 9000,
         historyApiFallback: true, // 不跳转    
     },

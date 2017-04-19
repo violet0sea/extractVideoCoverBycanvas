@@ -1,0 +1,52 @@
+.Home_footer {
+        position: absolute;
+        width: 66%;
+        bottom: 5%;
+        display: flex;
+        justify-content: center;
+        h2 {
+            padding-bottom: 30px;
+        }
+        .Home_followus {
+            position: relative;
+            p {
+                padding-left: 40px;
+            }
+            p:nth-child(2):before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 2px;
+                top: 50px;
+                background: url('/public/images/followIcon.png') no-repeat;
+                width: 25px;
+                height: 25px;
+            }
+            p:nth-child(3):before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 2px;
+                top: 75px;
+                background: url('/public/images/followIcon.png') no-repeat;
+                background-position: 0 -29px;
+                width: 25px;
+                height: 25px;
+            }
+            p:nth-child(4):before {
+                content: '';
+                display: block;
+                position: absolute;
+                left: 2px;
+                top: 100px;
+                background: url('/public/images/followIcon.png') no-repeat;
+                background-position: 0 -58px;
+                width: 25px;
+                height: 25px;
+            }
+        }
+    }
+    
+    .Home_footer > div {
+        width: calc(100% / 3);
+    }
