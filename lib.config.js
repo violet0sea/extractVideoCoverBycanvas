@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 const libs = [
     'react',
@@ -8,7 +9,7 @@ const libs = [
 
 module.exports = {
     output: {
-        path: 'public/lib',
+        path: path.resolve(__dirname, 'public/lib'),
         filename: '[name].js',
         library: '[name]'
     },

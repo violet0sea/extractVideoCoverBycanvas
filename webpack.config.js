@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const path = require("path");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+var openBrowser = require('react-dev-utils/openBrowser');
+openBrowser("http://localhost:9000")
 module.exports = {
     entry: "./index.js",
     output: {
@@ -26,6 +27,17 @@ module.exports = {
     },
     devServer: {
         port: 9000,
+        proxy: {
+          '/pic/upload': {
+            target:{
+                "host": "staging.admin.xk.miui.com",
+                "protocol": 'http:',
+                "port": 80
+            }, 
+            secure: false,
+            changeOrigin: true,
+          }
+        },
         historyApiFallback: true, // 不跳转    
     },
     devtool: "cheap-module-eval-source-map",
@@ -38,3 +50,4 @@ module.exports = {
         })
     ]
 }
+
